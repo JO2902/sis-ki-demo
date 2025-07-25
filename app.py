@@ -1,0 +1,22 @@
+
+import streamlit as st
+import openai
+
+st.title("SIS-KI Demo – Pflegeplanung per Spracheingabe")
+
+openai.api_key = st.text_input("🔑 OpenAI API Key", type="password")
+
+spoken_text = st.text_area("🎙 Spracheingabe (per WIN + H diktieren)", height=200)
+
+if st.button("🧠 Pflegeplanung generieren") and openai.api_key and spoken_text:
+    with st.spinner("KI analysiert..."):
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "Du bist ein Pflegeexperte. Erstelle eine Pflegeplanung gemäß den SIS-Themenfeldern."},
+                {"role": "user", "content": spoken_text}
+            ]
+        )
+        pflegeplanung = response['choices'][0]['message']['content']
+        st.subheader("📄 Pflegeplanung nach SIS")
+        st.text_area("Ergebnis", pflegeplanung, height=300)
