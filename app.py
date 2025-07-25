@@ -9,7 +9,7 @@ client = OpenAI (api_key=api_key) if api_key else None
 
 spoken_text = st.text_area("🎙 Spracheingabe (per WIN + H diktieren)", height=200)
 
-if st.button("🧠 Pflegeplanung generieren") and openai.api_key and spoken_text:
+if st.button("🧠 Pflegeplanung generieren") and api_key and spoken_text:
     with st.spinner("KI analysiert..."):
         response = client.chat.completions.create(
             model="gpt-4",
