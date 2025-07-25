@@ -18,6 +18,6 @@ if st.button("🧠 Pflegeplanung generieren") and api_key and spoken_text:
                 {"role": "user", "content": spoken_text}
             ]
         )
-        pflegeplanung = response['choices'][0]['message']['content']
+        pflegeplanung = response.choices[0].message.content
         st.subheader("📄 Pflegeplanung nach SIS")
         st.text_area("Ergebnis", pflegeplanung, height=300)
