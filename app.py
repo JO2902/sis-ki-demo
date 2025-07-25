@@ -1,16 +1,17 @@
 
 import streamlit as st
-import openai
+from openai import OpenAI
 
 st.title("SIS-KI Demo – Pflegeplanung per Spracheingabe")
 
-openai.api_key = st.text_input("🔑 OpenAI API Key", type="password")
+api_key = st.text_input("🔑 OpenAI API Key", type="password")
+client = OpenAI (api_key=api_key) if api_key else None
 
 spoken_text = st.text_area("🎙 Spracheingabe (per WIN + H diktieren)", height=200)
 
 if st.button("🧠 Pflegeplanung generieren") and openai.api_key and spoken_text:
     with st.spinner("KI analysiert..."):
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": "Du bist ein Pflegeexperte. Erstelle eine Pflegeplanung gemäß den SIS-Themenfeldern."},
