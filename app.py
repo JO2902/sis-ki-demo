@@ -22,7 +22,7 @@ Beziehe dich ausschließlich auf die Beschreibung der aktuellen pflegerischen Si
 '''
 
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-40-mini",
             messages=[
                 {"role": "system", "content": "Du bist eine Pflegefachkraft und formulierst nach SIS-Struktur."},
                 {"role": "user", "content": prompt}
